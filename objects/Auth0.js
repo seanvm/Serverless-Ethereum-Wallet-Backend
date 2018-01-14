@@ -10,12 +10,6 @@ class Auth0Service {
       clientSecret: process.env.AUTH0_MANAGEMENT_SECRET,
     });
   };
-  
-  getUser(userID) {
-    this.managementClient.getUser(userID).then(user => {
-      return user;
-    })
-  };
 };
 
 module.exports = Auth0Service;

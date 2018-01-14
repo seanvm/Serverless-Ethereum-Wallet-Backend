@@ -1,6 +1,6 @@
 'use strict';
 
-const Web3 = require('Web3');
+const Web3 = require('web3');
 // http://web3js.readthedocs.io/en/1.0/
 
 const dynamo = require('serverless-dynamo-client');
@@ -58,12 +58,18 @@ class Wallet {
           this.responseHandler();
         });
       }
+    }).catch(err =>{
+      var error = new Error('[500] Error Retrieving Wallet from DB')
+      this.callback(error);
     });
-	};
-	
-	responseHandler(){
+  };
+  
+  responseHandler(){
     var response = {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin" : "*" // Required for CORS support to work
+      },
       body: JSON.stringify({
         balance: this.balance,
         publicKey: this.publicKey,

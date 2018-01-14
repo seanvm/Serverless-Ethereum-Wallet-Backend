@@ -1,10 +1,21 @@
-service: eth_serverless
+service: eth-serverless-backend
 
 provider:
   name: aws
   runtime: nodejs6.10
   region: us-west-2
   environment: ${file(environment.yml)}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:BatchWriteItem
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: arn:aws:dynamodb:*:*:table/*
 
 functions:
   auth0Authorizer:
@@ -15,6 +26,7 @@ functions:
       - http:
           path: wallet/create
           method: get
+          cors: true
           authorizer:
             name: auth0Authorizer
             resultTtlInSeconds: 0
@@ -25,6 +37,7 @@ functions:
       - http:
           path: wallet/balance/
           method: get
+          cors: true
           authorizer:
             name: auth0Authorizer
             resultTtlInSeconds: 0
@@ -35,6 +48,7 @@ functions:
       - http:
           path: user/get/
           method: get
+          cors: true
           authorizer:
             name: auth0Authorizer
             resultTtlInSeconds: 0

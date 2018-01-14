@@ -29,6 +29,31 @@ sls dynamodb install
 npm start
 ```
 
+## Deploying
+
+If you are running `npm install` on OSX or Windows, you may need to rebuild the node_modules folder from within a Docker container running Linux before this app will work on AWS Lambda. An explanation of this workaround can be found [here](https://www.thepolyglotdeveloper.com/2017/12/deploying-native-nodejs-dependencies-aws-lambda/).
+
+If this is the case, simply run the following commands:
+
+1. Build the container
+```
+docker build -t eth .
+```
+
+2. Run the container. This will open up the terminal within the container:
+```
+docker run -v $(pwd):/eth -it eth:latest
+```
+
+3. Run the commands manually from the `./bin/dockerCommands.sh` file:
+```
+source /root/.nvm/nvm.sh 
+nvm use 6.10
+cd eth && npm rebuild
+```
+
+4. This should update your node_modules folder with the proper modules compiled for linux. You can now run `npm run deploy` to deploy to AWS.
+
 ## API
 
 All authentication is handled via Auth0. You will need to obtain an access token (JWT) to submit requests to the API.

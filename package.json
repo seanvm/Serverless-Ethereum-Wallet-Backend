@@ -11,6 +11,7 @@
     "jsonwebtoken": "^8.1.0",
     "jwks-rsa": "^1.2.1",
     "npm-auth0-authorizer": "^1.0.1",
+    "scrypt": "^6.0.3",
     "serverless-dynamo-client": "^1.0.1",
     "serverless-secrets-plugin": "^0.1.0",
     "web3": "^1.0.0-beta.27",
@@ -18,7 +19,7 @@
   },
   "devDependencies": {
     "serverless-dynamodb-local": "^0.2.27",
-		"serverless-offline": "^3.16.0"
+    "serverless-offline": "^3.16.0"
   },
   "author": "Sean van Mulligen",
   "license": "ISC",

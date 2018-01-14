@@ -7,3 +7,7 @@ jspm_packages
 
 # Secrets
 secrets.yml
+secrets.*.yml
+
+# Node
+npm-debug.log*

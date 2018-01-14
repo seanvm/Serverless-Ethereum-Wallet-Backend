@@ -5,7 +5,6 @@ const User = require('./objects/User');
 const AuthPolicy = require('./objects/AuthPolicy');
 const jwksClient = require('jwks-rsa');
 const jwt = require('jsonwebtoken');
-const dynamo = require('serverless-dynamo-client');
 
 // TODO: Implement auth0Authorizer npm module
 // const auth0Authorizer = require('npm-auth0-authorizer/methods/auth0Authorizer');

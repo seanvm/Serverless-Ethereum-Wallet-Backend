@@ -1,0 +1,9 @@
+ENVIRONMENT: ${opt:stage, self:provider.stage}
+INFURA: ${self:custom.secrets.INFURA}
+AUTH0_DOMAIN: ${self:custom.secrets.AUTH0_DOMAIN}
+AUTH0_AUDIENCE: ${self:custom.secrets.AUTH0_AUDIENCE}
+AUTH0_CLIENTID: ${self:custom.secrets.AUTH0_CLIENTID}
+AUTH0_SECRET: ${self:custom.secrets.AUTH0_SECRET}
+AUTH0_MANAGEMENT_CLIENTID: ${self:custom.secrets.AUTH0_MANAGEMENT_CLIENTID}
+AUTH0_MANAGEMENT_SECRET: ${self:custom.secrets.AUTH0_MANAGEMENT_SECRET}
+AUTH0_ALGORITHM: 'RS256'

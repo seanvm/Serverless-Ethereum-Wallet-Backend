@@ -1,0 +1,69 @@
+service: eth_serverless
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-west-2
+  environment: ${file(environment.yml)}
+
+functions:
+  auth0Authorizer:
+    handler: handler.auth0Authorizer
+  createWallet:
+    handler: handler.createWallet
+    events:
+      - http:
+          path: wallet/create
+          method: get
+          authorizer:
+            name: auth0Authorizer
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.Authorization
+  getWalletBalance:
+    handler: handler.getWalletBalance
+    events:
+      - http:
+          path: wallet/balance/
+          method: get
+          authorizer:
+            name: auth0Authorizer
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.Authorization
+  getUserInfo:
+    handler: handler.getUserInfo
+    events:
+      - http:
+          path: user/get/
+          method: get
+          authorizer:
+            name: auth0Authorizer
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.Authorization
+
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: usersTable
+        AttributeDefinitions:
+          - AttributeName: auth0ID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: auth0ID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-secrets-plugin
+  - serverless-offline
+  
+custom:
+  secrets: ${file(secrets.yml)}
+  dynamodb:
+    start:
+      port: 8000
+      migrate: true

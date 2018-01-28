@@ -1,7 +1,7 @@
 # Serverless Ethereum Wallet (Backend)
 This is the backend application for a lightweight Ethereum wallet. The backend for this application is written in Node.js, and utilizes the [serverless framework](https://github.com/serverless/serverless) for AWS Lambda. Authentication is handled via Auth0.
 
-The front-end companion project can be found here: (Coming Soon)
+The front-end companion project can be found here: [Serverless Ethereum Wallet Frontend](https://github.com/seanvm/Serverless-Ethereum-Wallet-Frontend)
 
 This is both a WIP, and a proof of concept, and is very limited in functionality. As such, **it should only be used with the Ethereum testnet**. 
 
